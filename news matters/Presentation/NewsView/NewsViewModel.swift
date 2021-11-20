@@ -9,27 +9,30 @@ import Foundation
 
 protocol NewsViewBinder: class {
     func reloadData()
+    func show(error: String)
 }
 
 class NewsViewModel {
     
     weak var binder: NewsViewBinder?
+    var repository: NewsRepositoryProtocol
+    var viewData: [News] = []
     
-    var viewData: [NewsDataModel] = []
-    
-    func getNews() {
-        viewData.append(NewsDataModel(title: "Supports of the Democratic candidate Jon Ossoff after his ...", author: "By DAVID LEONHARDT and STUART . THOMPSON", date: "2017-06-03", image: ""))
-        viewData.append(NewsDataModel(title: "Supports of the Democratic candidate Jon Ossoff after his ...", author: "By DAVID LEONHARDT and STUART . THOMPSON", date: "2017-06-03", image: ""))
-        viewData.append(NewsDataModel(title: "Supports of the Democratic candidate Jon Ossoff after his ...", author: "By DAVID LEONHARDT and STUART . THOMPSON", date: "2017-06-03", image: ""))
-        
-        binder?.reloadData()
+    init(repository: NewsRepositoryProtocol = NewsRepository()) {
+        self.repository = repository
     }
     
-}
-
-struct NewsDataModel {
-    var title: String
-    var author: String
-    var date: String
-    var image: String
+    func getNews() {
+        repository.getNews { [weak self] (result) in
+            guard let self = self else { return }
+            switch result {
+            case .success(let model):
+                self.viewData.append(contentsOf: model.results)
+                self.binder?.reloadData()
+            case .failure(let error):
+                self.binder?.show(error: error.localizedDescription)
+            }
+        }
+    }
+    
 }
