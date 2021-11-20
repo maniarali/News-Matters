@@ -123,6 +123,7 @@
 		1EF2C201274901CB00E89F29 /* news matters */ = {
 			isa = PBXGroup;
 			children = (
+				1EF2C2C527495D0500E89F29 /* Helper */,
 				1EF2C2A72749359C00E89F29 /* Networking */,
 				1EF2C25C2749173D00E89F29 /* Routing */,
 				1EF2C25227490E7700E89F29 /* DataRepository */,
@@ -226,6 +227,13 @@
 				1EF2C2BC27494BA800E89F29 /* NewsCell.xib */,
 			);
 			path = NewsCell;
+			sourceTree = "<group>";
+		};
+		1EF2C2C527495D0500E89F29 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

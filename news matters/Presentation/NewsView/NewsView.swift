@@ -59,8 +59,7 @@ extension NewsView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: NewsCell.self), for: indexPath) as! NewsCell
-        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: "NewsCell"), for: indexPath) as! NewsCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: NewsCell.self), for: indexPath) as! NewsCell
         cell.news = viewModel.viewData[indexPath.row]
         return cell
     }

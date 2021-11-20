@@ -26,8 +26,21 @@ struct News: Decodable {
     var byline: String
     var publishedDate: String
     
+    var media: [Media]
+    
     enum CodingKeys: String, CodingKey {
-        case id, url, title, byline
+        case id, url, title, byline, media
         case publishedDate = "published_date"
     }
+}
+
+struct Media: Decodable {
+    var mediaMetadata: [MetaData]
+    enum CodingKeys: String, CodingKey {
+        case mediaMetadata = "media-metadata"
+    }
+}
+
+struct MetaData: Decodable {
+    var url: String
 }
