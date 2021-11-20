@@ -52,6 +52,7 @@ class NetworkLayer: NetworkLayerProtocol {
         task?.resume()
     }
 }
+
 enum NetworkError: Error {
     case clientError
     case responseCodeError

@@ -9,11 +9,17 @@ import Foundation
 import UIKit
 
 extension UIView {
-    func createCardView() {
-        layer.cornerRadius = 20.0
-        layer.shadowColor = UIColor.darkGray.cgColor
-        layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
-        layer.shadowRadius = 8.0
-        layer.shadowOpacity = 0.7
+    
+    /// Will convert AnyView in card shape
+    func createCardView(cornerRadius: CGFloat = 20.0,
+                        shadowColor: CGColor = UIColor.darkGray.cgColor,
+                        shadowOffset: CGSize = CGSize(width: 0.0, height: 0.0),
+                        shadowRadius: CGFloat = 8.0,
+                        shadowOpacity: Float = 0.7) {
+        layer.cornerRadius = cornerRadius
+        layer.shadowColor = shadowColor
+        layer.shadowOffset = shadowOffset
+        layer.shadowRadius = shadowRadius
+        layer.shadowOpacity = shadowOpacity
     }
 }
