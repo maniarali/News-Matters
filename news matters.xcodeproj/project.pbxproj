@@ -29,6 +29,8 @@
 		1EF2C2BE27494BA800E89F29 /* NewsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1EF2C2BC27494BA800E89F29 /* NewsCell.xib */; };
 		1EF2C2CB27495FAB00E89F29 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF2C2CA27495FAB00E89F29 /* Coordinator.swift */; };
 		1EF2C2D327495FCC00E89F29 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF2C2D227495FCC00E89F29 /* MainCoordinator.swift */; };
+		1EF2C2D82749621600E89F29 /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF2C2D72749621600E89F29 /* UIImageView+Extensions.swift */; };
+		1EF2C2E32749633700E89F29 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF2C2E22749633700E89F29 /* UIView+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +79,8 @@
 		1EF2C2BC27494BA800E89F29 /* NewsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsCell.xib; sourceTree = "<group>"; };
 		1EF2C2CA27495FAB00E89F29 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		1EF2C2D227495FCC00E89F29 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		1EF2C2D72749621600E89F29 /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
+		1EF2C2E22749633700E89F29 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -238,6 +242,8 @@
 		1EF2C2C527495D0500E89F29 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				1EF2C2D72749621600E89F29 /* UIImageView+Extensions.swift */,
+				1EF2C2E22749633700E89F29 /* UIView+Extensions.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -380,6 +386,7 @@
 				1EF2C20D274901CB00E89F29 /* news_matters.xcdatamodeld in Sources */,
 				1EF2C25E2749176600E89F29 /* Routable.swift in Sources */,
 				1EF2C24927490CC700E89F29 /* NewsView.swift in Sources */,
+				1EF2C2E32749633700E89F29 /* UIView+Extensions.swift in Sources */,
 				1EF2C2CB27495FAB00E89F29 /* Coordinator.swift in Sources */,
 				1EF2C26F27491D3100E89F29 /* NewsDetailView.swift in Sources */,
 				1EF2C2A32749350F00E89F29 /* NewsResponseModel.swift in Sources */,
@@ -388,6 +395,7 @@
 				1EF2C205274901CB00E89F29 /* SceneDelegate.swift in Sources */,
 				1EF2C2BD27494BA800E89F29 /* NewsCell.swift in Sources */,
 				1EF2C2D327495FCC00E89F29 /* MainCoordinator.swift in Sources */,
+				1EF2C2D82749621600E89F29 /* UIImageView+Extensions.swift in Sources */,
 				1EF2C294274930DD00E89F29 /* NewsRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
