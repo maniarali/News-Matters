@@ -31,8 +31,16 @@ class NewsView: UIViewController, Routable {
     }
 }
 extension NewsView: NewsViewBinder {
+    
     func reloadData() {
-        tableView.reloadData()
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.tableView.reloadData()
+        }
+    }
+    
+    func show(error: String) {
+        //This method can be use to show error
     }
 }
 
@@ -46,7 +54,7 @@ extension NewsView: UITableViewDataSource {
         let cell = UITableViewCell()
         let news = viewModel.viewData[indexPath.row]
         cell.textLabel?.text = news.title
-        cell.detailTextLabel?.text = news.author
+        cell.detailTextLabel?.text = news.byline
         return cell
     }
 }
@@ -56,7 +64,7 @@ extension NewsView: UITableViewDelegate {
         self.showNewsDetails(with: news)
     }
     
-    private func showNewsDetails(with news: NewsDataModel) {
+    private func showNewsDetails(with news: News) {
         let detailView: NewsDetailView = NewsDetailView.instantiate()
         detailView.viewModel = NewsDetailViewModel(news: news)
         self.navigationController?.pushViewController(detailView, animated: true)

@@ -13,9 +13,9 @@ protocol NewsDetailViewBinder: class {
 
 class NewsDetailViewModel {
     
-    private var news: NewsDataModel
+    private var news: News
     
-    init(news: NewsDataModel) {
+    init(news: News) {
         self.news = news
     }
     weak var binder: NewsDetailViewBinder?
