@@ -27,6 +27,8 @@
 		1EF2C2A9274935B500E89F29 /* NetworkingLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF2C2A8274935B500E89F29 /* NetworkingLayer.swift */; };
 		1EF2C2BD27494BA800E89F29 /* NewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF2C2BB27494BA800E89F29 /* NewsCell.swift */; };
 		1EF2C2BE27494BA800E89F29 /* NewsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1EF2C2BC27494BA800E89F29 /* NewsCell.xib */; };
+		1EF2C2CB27495FAB00E89F29 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF2C2CA27495FAB00E89F29 /* Coordinator.swift */; };
+		1EF2C2D327495FCC00E89F29 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF2C2D227495FCC00E89F29 /* MainCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +75,8 @@
 		1EF2C2A8274935B500E89F29 /* NetworkingLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingLayer.swift; sourceTree = "<group>"; };
 		1EF2C2BB27494BA800E89F29 /* NewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCell.swift; sourceTree = "<group>"; };
 		1EF2C2BC27494BA800E89F29 /* NewsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsCell.xib; sourceTree = "<group>"; };
+		1EF2C2CA27495FAB00E89F29 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		1EF2C2D227495FCC00E89F29 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,6 +192,8 @@
 			isa = PBXGroup;
 			children = (
 				1EF2C25D2749176600E89F29 /* Routable.swift */,
+				1EF2C2CA27495FAB00E89F29 /* Coordinator.swift */,
+				1EF2C2D227495FCC00E89F29 /* MainCoordinator.swift */,
 			);
 			path = Routing;
 			sourceTree = "<group>";
@@ -374,12 +380,14 @@
 				1EF2C20D274901CB00E89F29 /* news_matters.xcdatamodeld in Sources */,
 				1EF2C25E2749176600E89F29 /* Routable.swift in Sources */,
 				1EF2C24927490CC700E89F29 /* NewsView.swift in Sources */,
+				1EF2C2CB27495FAB00E89F29 /* Coordinator.swift in Sources */,
 				1EF2C26F27491D3100E89F29 /* NewsDetailView.swift in Sources */,
 				1EF2C2A32749350F00E89F29 /* NewsResponseModel.swift in Sources */,
 				1EF2C24E27490DAF00E89F29 /* NewsViewModel.swift in Sources */,
 				1EF2C203274901CB00E89F29 /* AppDelegate.swift in Sources */,
 				1EF2C205274901CB00E89F29 /* SceneDelegate.swift in Sources */,
 				1EF2C2BD27494BA800E89F29 /* NewsCell.swift in Sources */,
+				1EF2C2D327495FCC00E89F29 /* MainCoordinator.swift in Sources */,
 				1EF2C294274930DD00E89F29 /* NewsRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

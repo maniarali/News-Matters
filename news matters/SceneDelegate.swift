@@ -10,15 +10,20 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
+    var coordinator: MainCoordinator?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
+        setupCoordinator(windowScene: windowScene)
+    }
+    
+    private func setupCoordinator(navigation: UINavigationController = UINavigationController(),
+                                  windowScene: UIWindowScene) {
         let window = UIWindow(windowScene: windowScene)
-        let viewController = NewsView.instantiate()
-        let navigation = UINavigationController(rootViewController: viewController)
-        window.rootViewController = navigation
+        coordinator = MainCoordinator(navigationController: navigation)
+        coordinator?.start()
         
+        window.rootViewController = navigation
         self.window = window
         window.makeKeyAndVisible()
     }

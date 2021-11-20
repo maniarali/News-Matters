@@ -12,6 +12,7 @@ class NewsView: UIViewController, Routable {
     @IBOutlet weak var tableView: UITableView!
     
     var viewModel = NewsViewModel()
+    weak var coordinator: MainCoordinator?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,12 +68,6 @@ extension NewsView: UITableViewDataSource {
 extension NewsView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let news = viewModel.viewData[indexPath.row]
-        self.showNewsDetails(with: news)
-    }
-    
-    private func showNewsDetails(with news: News) {
-        let detailView: NewsDetailView = NewsDetailView.instantiate()
-        detailView.viewModel = NewsDetailViewModel(news: news)
-        self.navigationController?.pushViewController(detailView, animated: true)
+        coordinator?.showNewsDetails(with: news)
     }
 }
