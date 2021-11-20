@@ -19,6 +19,7 @@ class NewsCell: UITableViewCell {
         cardBackgroundView.createCardView()
     }
     
+    /// When news is set it will set property accordingly. 
     var news: News? {
         didSet {
             titleLabel.text = news?.title

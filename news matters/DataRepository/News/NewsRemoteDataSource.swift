@@ -27,6 +27,7 @@ class NewsRemoteDataSource: NewsRemoteDataSourceProtocol {
         network.get(url: url, completion: completion)
     }
     
+    @available(*, deprecated, message: "Shall be removed from here and provide better class to construct URL")
     func constructNYURL(parameters: String) -> URL? {
         let baseURL = "https://api.nytimes.com/svc/"
         let category = "mostpopular"
