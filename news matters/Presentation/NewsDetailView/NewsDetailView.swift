@@ -6,11 +6,11 @@
 //
 
 import UIKit
+import WebKit
 
 class NewsDetailView: UIViewController, Routable {
-
-    @IBOutlet weak var detailTextView: UITextView!
     
+    @IBOutlet weak var webview: WKWebView!
     var viewModel: NewsDetailViewModel?
     
     override func viewDidLoad() {
@@ -23,6 +23,8 @@ class NewsDetailView: UIViewController, Routable {
 
 extension NewsDetailView: NewsDetailViewBinder {
     func showDetails(with detail: String) {
-        detailTextView.text = detail
+        let url = URL(string: detail)!
+        let urlRequest = URLRequest(url: url)
+        webview.load(urlRequest)
     }
 }

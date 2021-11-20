@@ -17,6 +17,7 @@ class NewsView: UIViewController, Routable {
         super.viewDidLoad()
         
         setupView()
+        setupNavigationBar()
         setupTableView()
     }
     
@@ -28,6 +29,13 @@ class NewsView: UIViewController, Routable {
     private func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
+        tableView.register(UINib(nibName: String(describing: NewsCell.self), bundle: nil), forCellReuseIdentifier: String(describing: NewsCell.self))
+    }
+    
+    private func setupNavigationBar() {
+        navigationController?.navigationBar.prefersLargeTitles = true
+        title = "NY Times Most Popular"
     }
 }
 extension NewsView: NewsViewBinder {
@@ -51,10 +59,9 @@ extension NewsView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        let news = viewModel.viewData[indexPath.row]
-        cell.textLabel?.text = news.title
-        cell.detailTextLabel?.text = news.byline
+//        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: NewsCell.self), for: indexPath) as! NewsCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: "NewsCell"), for: indexPath) as! NewsCell
+        cell.news = viewModel.viewData[indexPath.row]
         return cell
     }
 }
