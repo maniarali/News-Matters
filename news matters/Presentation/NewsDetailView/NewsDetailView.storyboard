@@ -16,25 +16,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="nr6-ej-jwJ">
+                            <wkWebView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n8k-SM-asY">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="textColor" systemColor="labelColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ZPn-58-v0c"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="nr6-ej-jwJ" firstAttribute="trailing" secondItem="ZPn-58-v0c" secondAttribute="trailing" id="FG9-U6-Jkx"/>
-                            <constraint firstItem="ZPn-58-v0c" firstAttribute="bottom" secondItem="nr6-ej-jwJ" secondAttribute="bottom" id="LBX-SM-FwL"/>
-                            <constraint firstItem="nr6-ej-jwJ" firstAttribute="leading" secondItem="ZPn-58-v0c" secondAttribute="leading" id="ndX-kA-D95"/>
-                            <constraint firstItem="nr6-ej-jwJ" firstAttribute="top" secondItem="ZPn-58-v0c" secondAttribute="top" id="yLO-yb-F6A"/>
+                            <constraint firstItem="ZPn-58-v0c" firstAttribute="bottom" secondItem="n8k-SM-asY" secondAttribute="bottom" id="Elz-NW-OnK"/>
+                            <constraint firstItem="ZPn-58-v0c" firstAttribute="trailing" secondItem="n8k-SM-asY" secondAttribute="trailing" id="eAj-lP-ngd"/>
+                            <constraint firstItem="n8k-SM-asY" firstAttribute="leading" secondItem="ZPn-58-v0c" secondAttribute="leading" id="hV4-Bh-NnK"/>
+                            <constraint firstItem="n8k-SM-asY" firstAttribute="top" secondItem="ZPn-58-v0c" secondAttribute="top" id="uP7-Z6-Zrc"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="detailTextView" destination="nr6-ej-jwJ" id="axv-Fw-zSY"/>
+                        <outlet property="webview" destination="n8k-SM-asY" id="ko4-3P-KPS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="stW-z4-cKZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -43,11 +44,8 @@
         </scene>
     </scenes>
     <resources>
-        <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        <systemColor name="systemGroupedBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

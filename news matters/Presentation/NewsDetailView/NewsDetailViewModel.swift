@@ -21,7 +21,7 @@ class NewsDetailViewModel {
     weak var binder: NewsDetailViewBinder?
     
     func populateDetailData() {
-        binder?.showDetails(with: news.title)
+        binder?.showDetails(with: news.url)
     }
  
 }

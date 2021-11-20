@@ -25,6 +25,12 @@
 		1EF2C29A2749316700E89F29 /* NewsRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF2C2992749316700E89F29 /* NewsRemoteDataSource.swift */; };
 		1EF2C2A32749350F00E89F29 /* NewsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF2C2A22749350F00E89F29 /* NewsResponseModel.swift */; };
 		1EF2C2A9274935B500E89F29 /* NetworkingLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF2C2A8274935B500E89F29 /* NetworkingLayer.swift */; };
+		1EF2C2BD27494BA800E89F29 /* NewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF2C2BB27494BA800E89F29 /* NewsCell.swift */; };
+		1EF2C2BE27494BA800E89F29 /* NewsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1EF2C2BC27494BA800E89F29 /* NewsCell.xib */; };
+		1EF2C2CB27495FAB00E89F29 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF2C2CA27495FAB00E89F29 /* Coordinator.swift */; };
+		1EF2C2D327495FCC00E89F29 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF2C2D227495FCC00E89F29 /* MainCoordinator.swift */; };
+		1EF2C2D82749621600E89F29 /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF2C2D72749621600E89F29 /* UIImageView+Extensions.swift */; };
+		1EF2C2E32749633700E89F29 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF2C2E22749633700E89F29 /* UIView+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +75,12 @@
 		1EF2C2992749316700E89F29 /* NewsRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsRemoteDataSource.swift; sourceTree = "<group>"; };
 		1EF2C2A22749350F00E89F29 /* NewsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsResponseModel.swift; sourceTree = "<group>"; };
 		1EF2C2A8274935B500E89F29 /* NetworkingLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingLayer.swift; sourceTree = "<group>"; };
+		1EF2C2BB27494BA800E89F29 /* NewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCell.swift; sourceTree = "<group>"; };
+		1EF2C2BC27494BA800E89F29 /* NewsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsCell.xib; sourceTree = "<group>"; };
+		1EF2C2CA27495FAB00E89F29 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		1EF2C2D227495FCC00E89F29 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		1EF2C2D72749621600E89F29 /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
+		1EF2C2E22749633700E89F29 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +131,7 @@
 		1EF2C201274901CB00E89F29 /* news matters */ = {
 			isa = PBXGroup;
 			children = (
+				1EF2C2C527495D0500E89F29 /* Helper */,
 				1EF2C2A72749359C00E89F29 /* Networking */,
 				1EF2C25C2749173D00E89F29 /* Routing */,
 				1EF2C25227490E7700E89F29 /* DataRepository */,
@@ -163,6 +176,7 @@
 		1EF2C24727490C8200E89F29 /* NewsView */ = {
 			isa = PBXGroup;
 			children = (
+				1EF2C2BA27494B8100E89F29 /* NewsCell */,
 				1EF2C208274901CB00E89F29 /* NewsView.storyboard */,
 				1EF2C24827490CC700E89F29 /* NewsView.swift */,
 				1EF2C24D27490DAF00E89F29 /* NewsViewModel.swift */,
@@ -182,6 +196,8 @@
 			isa = PBXGroup;
 			children = (
 				1EF2C25D2749176600E89F29 /* Routable.swift */,
+				1EF2C2CA27495FAB00E89F29 /* Coordinator.swift */,
+				1EF2C2D227495FCC00E89F29 /* MainCoordinator.swift */,
 			);
 			path = Routing;
 			sourceTree = "<group>";
@@ -212,6 +228,24 @@
 				1EF2C2A8274935B500E89F29 /* NetworkingLayer.swift */,
 			);
 			path = Networking;
+			sourceTree = "<group>";
+		};
+		1EF2C2BA27494B8100E89F29 /* NewsCell */ = {
+			isa = PBXGroup;
+			children = (
+				1EF2C2BB27494BA800E89F29 /* NewsCell.swift */,
+				1EF2C2BC27494BA800E89F29 /* NewsCell.xib */,
+			);
+			path = NewsCell;
+			sourceTree = "<group>";
+		};
+		1EF2C2C527495D0500E89F29 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				1EF2C2D72749621600E89F29 /* UIImageView+Extensions.swift */,
+				1EF2C2E22749633700E89F29 /* UIView+Extensions.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -319,6 +353,7 @@
 			files = (
 				1EF2C26A27491D0300E89F29 /* NewsDetailView.storyboard in Resources */,
 				1EF2C212274901CC00E89F29 /* LaunchScreen.storyboard in Resources */,
+				1EF2C2BE27494BA800E89F29 /* NewsCell.xib in Resources */,
 				1EF2C20F274901CC00E89F29 /* Assets.xcassets in Resources */,
 				1EF2C20A274901CB00E89F29 /* NewsView.storyboard in Resources */,
 			);
@@ -351,11 +386,16 @@
 				1EF2C20D274901CB00E89F29 /* news_matters.xcdatamodeld in Sources */,
 				1EF2C25E2749176600E89F29 /* Routable.swift in Sources */,
 				1EF2C24927490CC700E89F29 /* NewsView.swift in Sources */,
+				1EF2C2E32749633700E89F29 /* UIView+Extensions.swift in Sources */,
+				1EF2C2CB27495FAB00E89F29 /* Coordinator.swift in Sources */,
 				1EF2C26F27491D3100E89F29 /* NewsDetailView.swift in Sources */,
 				1EF2C2A32749350F00E89F29 /* NewsResponseModel.swift in Sources */,
 				1EF2C24E27490DAF00E89F29 /* NewsViewModel.swift in Sources */,
 				1EF2C203274901CB00E89F29 /* AppDelegate.swift in Sources */,
 				1EF2C205274901CB00E89F29 /* SceneDelegate.swift in Sources */,
+				1EF2C2BD27494BA800E89F29 /* NewsCell.swift in Sources */,
+				1EF2C2D327495FCC00E89F29 /* MainCoordinator.swift in Sources */,
+				1EF2C2D82749621600E89F29 /* UIImageView+Extensions.swift in Sources */,
 				1EF2C294274930DD00E89F29 /* NewsRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

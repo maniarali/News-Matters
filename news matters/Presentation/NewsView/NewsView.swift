@@ -12,11 +12,13 @@ class NewsView: UIViewController, Routable {
     @IBOutlet weak var tableView: UITableView!
     
     var viewModel = NewsViewModel()
+    weak var coordinator: MainCoordinator?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupView()
+        setupNavigationBar()
         setupTableView()
     }
     
@@ -28,6 +30,13 @@ class NewsView: UIViewController, Routable {
     private func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
+        tableView.register(UINib(nibName: String(describing: NewsCell.self), bundle: nil), forCellReuseIdentifier: String(describing: NewsCell.self))
+    }
+    
+    private func setupNavigationBar() {
+        navigationController?.navigationBar.prefersLargeTitles = true
+        title = "NY Times Most Popular"
     }
 }
 extension NewsView: NewsViewBinder {
@@ -51,22 +60,14 @@ extension NewsView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        let news = viewModel.viewData[indexPath.row]
-        cell.textLabel?.text = news.title
-        cell.detailTextLabel?.text = news.byline
+        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: NewsCell.self), for: indexPath) as! NewsCell
+        cell.news = viewModel.viewData[indexPath.row]
         return cell
     }
 }
 extension NewsView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let news = viewModel.viewData[indexPath.row]
-        self.showNewsDetails(with: news)
-    }
-    
-    private func showNewsDetails(with news: News) {
-        let detailView: NewsDetailView = NewsDetailView.instantiate()
-        detailView.viewModel = NewsDetailViewModel(news: news)
-        self.navigationController?.pushViewController(detailView, animated: true)
+        coordinator?.showNewsDetails(with: news)
     }
 }
