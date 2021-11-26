@@ -1,4 +1,8 @@
 # News-Matters
+** Project Description **
+
+Build simple app that hits the	NY Times Most Popular Articles API and show a list of articles, its shows	details	when items on the list are tapped.
+  API: http://api.nytimes.com/svc/mostpopular/v2/mostviewed/{section}/{period}.json?apikey=sample-key
 
 ** Build Project **
 1. Download Project:
@@ -18,13 +22,13 @@
 1. App show listing of Most Popular NY Times
 2. On clicking any item list redirect to detail screen
 
-** Architectural Patter **
+** Architectural Pattern **
 1. For presentation layer => MVVM
 2. For data layer => Repository Pattern
 3. For Routing => Coordinator Pattern
 
 ** Solid Design Principles **
-Class are tried created in a manner where each class have single resposibilities, and its close modification and open for extension, inteface are implemented at segrated level, and dependecies and inverted as much possible.
+Class are tried created in a manner where each class have single resposibilities, and its close modification and open for extension, inteface are implemented at segrated level, and dependecies are inverted as much possible.
 
 ** Room for improvement **
 There can be seprate layer for business decision which can be done at (Uses Cases)
