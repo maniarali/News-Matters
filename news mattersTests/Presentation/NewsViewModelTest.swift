@@ -14,13 +14,13 @@ class NewsViewModelTest: XCTestCase {
 
     func testGetNewsSuccessful() {
         sut = NewsViewModel(repository: SuccessMockRepositoryProtocol())
-        sut.getNews()
+        sut.fetchNews()
         XCTAssertEqual(sut.viewData.count, 1)
     }
     
     func testGetNewsFailure() {
         sut = NewsViewModel(repository: FailureMockRepositoryProtocol())
-        sut.getNews()
+        sut.fetchNews()
         XCTAssertEqual(sut.viewData.count, 0)
     }
 

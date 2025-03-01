@@ -7,22 +7,25 @@
 
 import Foundation
 
-protocol NewsViewBinder: class {
-    func reloadData()
-    func show(error: String)
+protocol NewsViewModelBinder: AnyObject {
+    var binder: NewsViewProtocol? { get set }
+    var viewData: [News] { get }
+    
+    func fetchNews() -> Void
 }
 
-class NewsViewModel {
+class NewsViewModel: NewsViewModelBinder {
     
-    weak var binder: NewsViewBinder?
-    var repository: NewsRepositoryProtocol
-    var viewData: [News] = []
+    weak var binder: NewsViewProtocol?
+    private var repository: NewsRepositoryProtocol
+    
+    private(set) var viewData: [News] = []
     
     init(repository: NewsRepositoryProtocol = NewsRepository()) {
         self.repository = repository
     }
     
-    func getNews() {
+    func fetchNews() {
         repository.getNews { [weak self] (result) in
             guard let self = self else { return }
             switch result {
