@@ -8,23 +8,22 @@
 import Foundation
 import UIKit
 
-class MainCoordinator: Coordinator {
-    var childCoordinators = [Coordinator]()
+protocol MainCoordinatorProtocol {
+    func showNewsDetails(with news: News)
+}
+
+struct MainCoordinator: Coordinator, MainCoordinatorProtocol {
     var navigationController: UINavigationController
 
-    init(navigationController: UINavigationController) {
-        self.navigationController = navigationController
-    }
-
     func start() {
-        let vc: NewsView = NewsView.instantiate()
-        vc.coordinator = self
+        let vc: NewsView = NewsView(viewModel: NewsViewModel(), coordinator: self)
         navigationController.pushViewController(vc, animated: false)
     }
     
+    //TODO: Maniar - Child Coordinator
     func showNewsDetails(with news: News) {
-        let detailView: NewsDetailView = NewsDetailView.instantiate()
-        detailView.viewModel = NewsDetailViewModel(news: news)
+        let viewModel: NewsDetailViewBinder = NewsDetailViewModel(news: news)
+        let detailView: NewsDetailViewProtocol = NewsDetailView(viewModel: viewModel)
         navigationController.pushViewController(detailView, animated: true)
     }
 }

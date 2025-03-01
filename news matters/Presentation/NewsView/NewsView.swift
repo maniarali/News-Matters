@@ -7,31 +7,66 @@
 
 import UIKit
 
-class NewsView: UIViewController, Routable {
+protocol NewsViewProtocol: AnyObject {
+    func reloadData()
+    func show(error: String)
+}
+
+class NewsView: UIViewController {
     
-    @IBOutlet weak var tableView: UITableView!
+    private var viewModel: NewsViewModelBinder
+    private var coordinator: MainCoordinatorProtocol
     
-    var viewModel = NewsViewModel()
-    weak var coordinator: MainCoordinator?
+    var tableView : UITableView = {
+        let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.separatorStyle = .none
+        tableView.showsVerticalScrollIndicator = false
+        return tableView
+    }()
+    
+    init(viewModel: NewsViewModelBinder, coordinator: MainCoordinatorProtocol) {
+        self.viewModel = viewModel
+        self.coordinator = coordinator
+        super.init(nibName: nil, bundle: nil)
+        viewModel.binder = self
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupView()
+        setupTableViewConstrains()
         setupNavigationBar()
         setupTableView()
+        
+        viewModel.fetchNews()
     }
     
     private func setupView() {
-        viewModel.binder = self
-        viewModel.getNews()
+        view.backgroundColor = .systemBackground
+        view.addSubview(tableView)
     }
+    
+    private func setupTableViewConstrains() {
+        let safeAreaLayout = self.view.safeAreaLayoutGuide
+        
+        tableView.topAnchor.constraint(equalTo: safeAreaLayout.topAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: safeAreaLayout.bottomAnchor).isActive = true
+        tableView.leadingAnchor.constraint(equalTo: safeAreaLayout.leadingAnchor).isActive = true
+        tableView.trailingAnchor.constraint(equalTo: safeAreaLayout.trailingAnchor).isActive = true
+    }
+    
 
     private func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
-        tableView.register(UINib(nibName: String(describing: NewsCell.self), bundle: nil), forCellReuseIdentifier: String(describing: NewsCell.self))
+        tableView.register(NewsCell.self, forCellReuseIdentifier: String(describing: NewsCell.self))
     }
     
     private func setupNavigationBar() {
@@ -39,7 +74,7 @@ class NewsView: UIViewController, Routable {
         title = "NY Times Most Popular"
     }
 }
-extension NewsView: NewsViewBinder {
+extension NewsView: NewsViewProtocol {
     
     func reloadData() {
         DispatchQueue.main.async { [weak self] in
@@ -60,14 +95,18 @@ extension NewsView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: NewsCell.self), for: indexPath) as! NewsCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: NewsCell.self), for: indexPath) as? NewsCell else {
+            return UITableViewCell()
+        }
+        cell.setupView()
         cell.news = viewModel.viewData[indexPath.row]
         return cell
     }
 }
+
 extension NewsView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let news = viewModel.viewData[indexPath.row]
-        coordinator?.showNewsDetails(with: news)
+        coordinator.showNewsDetails(with: news)
     }
 }

@@ -20,19 +20,7 @@ class NewsRemoteDataSource: NewsRemoteDataSourceProtocol {
     }
     
     func getNews(for section: String, period: Int, completion: @escaping (Result<NewsResponseModel, Error>) -> Void) {
-        guard let url = constructNYURL(parameters: "\(section)/\(period)") else {
-            completion(.failure(NetworkError.invalidURL))
-            return
-        }
-        network.get(url: url, completion: completion)
-    }
-    
-    @available(*, deprecated, message: "Shall be removed from here and provide better class to construct URL")
-    func constructNYURL(parameters: String) -> URL? {
-        let baseURL = "https://api.nytimes.com/svc/"
-        let category = "mostpopular"
-        let version = "v2"
-        let key = "MAw75O5xbL7htYq8VccOoMt4Z2rEH1uA"
-        return URL(string: "\(baseURL)/\(category)/\(version)/mostviewed/\(parameters).json?api-key=\(key)")
+        let mostPopularRequest = APIRoute.ArticleRoute.mostPopularArticles(section: section, period: period)
+        network.perform(request: mostPopularRequest, completion: completion)
     }
 }
