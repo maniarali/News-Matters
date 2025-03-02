@@ -38,13 +38,13 @@ class NewsRepositoryTest: XCTestCase {
 }
 
 class MockSuccessNewsRemoteDataSource: NewsRemoteDataSourceProtocol {
-    func getNews(for section: String, period: Int, completion: @escaping (Result<NewsResponseModel, Error>) -> Void) {
+    func getNews(for request: news_matters.NewsRequestModel, completion: @escaping (Result<NewsResponseModel, Error>) -> Void) {
         completion(.success(TestFactory.aNewsResponse))
     }
 }
 
 class MockFailureNewsRemoteDataSource: NewsRemoteDataSourceProtocol {
-    func getNews(for section: String, period: Int, completion: @escaping (Result<NewsResponseModel, Error>) -> Void) {
+    func getNews(for request: news_matters.NewsRequestModel, completion: @escaping (Result<NewsResponseModel, Error>) -> Void) {
         completion(.failure(APIError.fakeError))
     }
 }

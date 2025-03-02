@@ -13,7 +13,7 @@ class NewsRemoteRepositoryTests: XCTestCase {
     func testGetNewsSuccessful() {
         let sut = NewsRemoteDataSource(network: MockSuccessNetworkLayer())
         let expectation = self.expectation(description: "Test Get News Successful from Remote Source")
-        sut.getNews(for: "", period: 0) { (result) in
+        sut.getNews(for: NewsRequestModel(section: "mock-section", period: 7)) { (result) in
             switch result {
             case.success(let response):
                 XCTAssertNotNil(response)
@@ -28,7 +28,7 @@ class NewsRemoteRepositoryTests: XCTestCase {
     func testGetNewsFailure() {
         let sut = NewsRemoteDataSource(network: MockFailureNetworkLayerProtocol())
         let expectation = self.expectation(description: "Test Get News Successful from Remote Source")
-        sut.getNews(for: "", period: 0) { (result) in
+        sut.getNews(for: NewsRequestModel(section: "mock-section", period: 7)) { (result) in
             switch result {
             case.success(let response): XCTAssertNil(response)
             case.failure(let error): XCTAssertNotNil(error)

@@ -58,7 +58,7 @@ class NewsDetailView: UIViewController {
 
 extension NewsDetailView: NewsDetailViewDelegate {
     func showDetails(with detail: String) {
-        let url = URL(string: detail)!
+        guard let url = URL(string: detail) else { return }
         let urlRequest = URLRequest(url: url)
         webView.load(urlRequest)
     }

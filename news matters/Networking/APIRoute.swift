@@ -13,7 +13,7 @@ enum APIRoute {
         
     enum ArticleRoute: NetworkRequest {
                 
-        case mostPopularArticles(section: String, period: Int)
+        case mostPopularArticles(request: NewsRequestModel)
         
         var method: HTTPMethod {
             switch self {
@@ -24,8 +24,8 @@ enum APIRoute {
         
         var route: URL {
             switch self {
-            case .mostPopularArticles(let section, let period):
-                NetworkConstants.URLs.baseURL.appendingPathComponent("\(Constant.svc)/\(Constant.mostPopular)/\(Constant.version)/\(Constant.mostviewed)/\(section)/\(period).\(Constant.json)")
+            case .mostPopularArticles(let request):
+                NetworkConstants.URLs.baseURL.appendingPathComponent("\(Constant.svc)/\(Constant.mostPopular)/\(Constant.version)/\(Constant.mostviewed)/\(request.section)/\(request.period).\(Constant.json)")
             }
         }
         

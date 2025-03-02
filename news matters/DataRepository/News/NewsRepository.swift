@@ -24,6 +24,6 @@ class NewsRepository: NewsRepositoryProtocol {
     func getNews(completion: @escaping (Result<NewsResponseModel, Error>) -> Void) {
         // Fetch data from remote repository only
         // Data can also be provided from local repository if needed.
-        remote.getNews(for: Constant.allSections, period: Constant.period, completion: completion)
+        remote.getNews(for: NewsRequestModel(section: Constant.allSections, period: Constant.period), completion: completion)
     }
 }
