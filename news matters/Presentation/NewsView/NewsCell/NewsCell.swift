@@ -76,18 +76,18 @@ class NewsCell: UITableViewCell {
     }
     
     func setupView() {
-        self.addSubViews()
-        self.setupConstriants()
+        addSubViews()
+        setupConstriants()
     }
     
     private func addSubViews() {
-        self.contentView.addSubview(self.cardBackgroundView)
-        self.cardBackgroundView.addSubview(self.newsImageView)
-        self.cardBackgroundView.addSubview(self.blurView)
-        self.blurView.addSubview(self.dataStack)
-        self.dataStack.addArrangedSubview(self.titleLabel)
-        self.dataStack.addArrangedSubview(self.authorLabel)
-        self.dataStack.addArrangedSubview(self.dateLabel)
+        contentView.addSubview(cardBackgroundView)
+        cardBackgroundView.addSubview(newsImageView)
+        cardBackgroundView.addSubview(blurView)
+        blurView.addSubview(dataStack)
+        dataStack.addArrangedSubview(titleLabel)
+        dataStack.addArrangedSubview(authorLabel)
+        dataStack.addArrangedSubview(dateLabel)
     }
     
     private func setupConstriants() {
@@ -98,30 +98,30 @@ class NewsCell: UITableViewCell {
     }
     
     private func setupConstraintsForCardBackgroundView() {
-        self.cardBackgroundView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 10).isActive = true
-        self.cardBackgroundView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 10).isActive = true
-        self.cardBackgroundView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -10).isActive = true
-        self.cardBackgroundView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -10).isActive = true
+        cardBackgroundView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
+        cardBackgroundView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
+        cardBackgroundView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
+        cardBackgroundView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10).isActive = true
     }
     
     private func setupConstraintsForNewsImageView() {
-        self.newsImageView.topAnchor.constraint(equalTo: self.cardBackgroundView.topAnchor).isActive = true
-        self.newsImageView.leadingAnchor.constraint(equalTo: self.cardBackgroundView.leadingAnchor).isActive = true
-        self.newsImageView.trailingAnchor.constraint(equalTo: self.cardBackgroundView.trailingAnchor).isActive = true
-        self.newsImageView.bottomAnchor.constraint(equalTo: self.cardBackgroundView.bottomAnchor).isActive = true
+        newsImageView.topAnchor.constraint(equalTo: cardBackgroundView.topAnchor).isActive = true
+        newsImageView.leadingAnchor.constraint(equalTo: cardBackgroundView.leadingAnchor).isActive = true
+        newsImageView.trailingAnchor.constraint(equalTo: cardBackgroundView.trailingAnchor).isActive = true
+        newsImageView.bottomAnchor.constraint(equalTo: cardBackgroundView.bottomAnchor).isActive = true
     }
     private func setupConstraintsForBlurView() {
-        self.blurView.topAnchor.constraint(equalTo: self.cardBackgroundView.topAnchor).isActive = true
-        self.blurView.leadingAnchor.constraint(equalTo: self.cardBackgroundView.leadingAnchor).isActive = true
-        self.blurView.trailingAnchor.constraint(equalTo: self.cardBackgroundView.trailingAnchor).isActive = true
-        self.blurView.bottomAnchor.constraint(equalTo: self.cardBackgroundView.bottomAnchor).isActive = true
+        blurView.topAnchor.constraint(equalTo: cardBackgroundView.topAnchor).isActive = true
+        blurView.leadingAnchor.constraint(equalTo: cardBackgroundView.leadingAnchor).isActive = true
+        blurView.trailingAnchor.constraint(equalTo: cardBackgroundView.trailingAnchor).isActive = true
+        blurView.bottomAnchor.constraint(equalTo: cardBackgroundView.bottomAnchor).isActive = true
     }
     
     private func setupConstraintsForVerticalStackView() {
-        self.dataStack.topAnchor.constraint(equalTo: self.blurView.topAnchor, constant: 16).isActive = true
-        self.dataStack.leadingAnchor.constraint(equalTo: self.blurView.leadingAnchor, constant: 16).isActive = true
-        self.dataStack.trailingAnchor.constraint(equalTo: self.blurView.trailingAnchor, constant: -16).isActive = true
-        self.dataStack.bottomAnchor.constraint(equalTo: self.blurView.bottomAnchor, constant: -16).isActive = true
+        dataStack.topAnchor.constraint(equalTo: blurView.topAnchor, constant: 16).isActive = true
+        dataStack.leadingAnchor.constraint(equalTo: blurView.leadingAnchor, constant: 16).isActive = true
+        dataStack.trailingAnchor.constraint(equalTo: blurView.trailingAnchor, constant: -16).isActive = true
+        dataStack.bottomAnchor.constraint(equalTo: blurView.bottomAnchor, constant: -16).isActive = true
     }
     
     /// When news is set it will set property accordingly.

@@ -90,14 +90,14 @@ extension NewsView: Toastable {
     
     private func reloadData() {
         DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
+            guard let self else { return }
             self.tableView.reloadData()
         }
     }
     
     private func show(error: String) {
         DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
+            guard let self else { return }
             self.showToast(message: error)
         }
     }
