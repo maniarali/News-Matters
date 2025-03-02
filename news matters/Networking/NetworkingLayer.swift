@@ -6,45 +6,33 @@
 //
 
 import Foundation
+import Combine
 
 protocol NetworkLayerProtocol {
-    func perform<A>(request: URLRequestConvertable, completion: @escaping (Result<A, Error>) -> Void) where A: Decodable
+    func perform<A: Decodable>(request: URLRequestConvertable) -> AnyPublisher<A, Error>
 }
 
-class NetworkLayer: NetworkLayerProtocol {
+struct NetworkLayer: NetworkLayerProtocol {
     
-    private var session: URLSession
-    private var task: URLSessionDataTask?
+    private let session: URLSession
+    private let decoder: JSONDecoder
     
-    init(session: URLSession = URLSession.shared) {
+    init(session: URLSession = URLSession.shared, decoder: JSONDecoder = JSONDecoder()) {
         self.session = session
+        self.decoder = decoder
     }
     
-    func perform<A>(request: URLRequestConvertable, completion: @escaping (Result<A, Error>) -> Void) where A : Decodable {
-        self.task = session.dataTask(with: request.asURLRequest()) { data, response, error in
-            guard let data, error == nil else {
-                completion(.failure(NetworkError.clientError))
-                return
+    func perform<A: Decodable>(request: URLRequestConvertable) -> AnyPublisher<A, Error> {
+        session
+            .dataTaskPublisher(for: request.asURLRequest())
+            .tryMap() { element -> Data in
+                guard let response = element.response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
+                    throw NetworkError.responseCodeError
+                }
+                return element.data
             }
-
-            guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
-                completion(.failure(NetworkError.responseCodeError))
-                return
-            }
-
-            guard let mime = response.mimeType, mime == "application/json" else {
-                completion(.failure(NetworkError.mimeTypeError))
-                return
-            }
-            do {
-                let model = try JSONDecoder().decode(A.self, from: data)
-                completion(.success(model))
-            } catch {
-                completion(.failure(NetworkError.jsonDecodingError))
-            }
-            
-        }
-        task?.resume()
+            .decode(type: A.self, decoder: decoder)
+            .eraseToAnyPublisher()
     }
 }
 

@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import Combine
 
 protocol NewsRemoteDataSourceProtocol {
-    func getNews(for request: NewsRequestModel, completion: @escaping (Result<NewsResponseModel, Error>) -> Void)
+    func getNews(for request: NewsRequestModel) -> AnyPublisher<NewsResponseModel, Error>
 }
 
 class NewsRemoteDataSource: NewsRemoteDataSourceProtocol {
@@ -19,8 +20,10 @@ class NewsRemoteDataSource: NewsRemoteDataSourceProtocol {
         self.network = network
     }
     
-    func getNews(for request: NewsRequestModel, completion: @escaping (Result<NewsResponseModel, Error>) -> Void) {
+    func getNews(for request: NewsRequestModel) -> AnyPublisher<NewsResponseModel, Error> {
         let mostPopularRequest = APIRoute.ArticleRoute.mostPopularArticles(request: request)
-        network.perform(request: mostPopularRequest, completion: completion)
+        let response: AnyPublisher<NewsResponseModel, Error>
+        response = network.perform(request: mostPopularRequest)
+        return response.eraseToAnyPublisher()
     }
 }

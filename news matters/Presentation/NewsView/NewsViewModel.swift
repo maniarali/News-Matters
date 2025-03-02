@@ -30,22 +30,26 @@ class NewsViewModel: NewsViewModelProtocol {
             self.updates.send(.dataUpdated)
         }
     }
+    
     private(set) var updates: NewsViewUpdates = .init()
+    private var cancellable: AnyCancellable?
     
     init(repository: NewsRepositoryProtocol = NewsRepository()) {
         self.repository = repository
     }
     
     func fetchNews() {
-        repository.getNews { [weak self] (result) in
-            guard let self else { return }
-            switch result {
-            case .success(let model):
-                self.viewData.append(contentsOf: model.results)
-            case .failure(let error):
-                self.updates.send(.error(error))
+        cancellable = repository.getNews()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] completion in
+                guard let self else { return }
+                if case .failure(let error) = completion {
+                    self.updates.send(.error(error))
+                }
+            } receiveValue: { [weak self] news in
+                guard let self else { return }
+                self.viewData.append(contentsOf: news)
             }
-        }
     }
     
 }

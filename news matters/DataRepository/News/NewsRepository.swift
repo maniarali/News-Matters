@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import Combine
 
 protocol NewsRepositoryProtocol {
-    func getNews(completion: @escaping (Result<NewsResponseModel, Error>) -> Void)
+    func getNews() -> AnyPublisher<[News], Error>
 }
 
 /// Repository layer which is resposible to provide data in app
@@ -21,9 +22,12 @@ class NewsRepository: NewsRepositoryProtocol {
         self.remote = remote
     }
     
-    func getNews(completion: @escaping (Result<NewsResponseModel, Error>) -> Void) {
+    func getNews() -> AnyPublisher<[News], Error> {
         // Fetch data from remote repository only
         // Data can also be provided from local repository if needed.
-        remote.getNews(for: NewsRequestModel(section: Constant.allSections, period: Constant.period), completion: completion)
+        return remote
+            .getNews(for: NewsRequestModel(section: Constant.allSections, period: Constant.period))
+            .map(\.results)
+            .eraseToAnyPublisher()
     }
 }
