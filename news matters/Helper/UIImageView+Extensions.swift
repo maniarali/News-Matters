@@ -33,7 +33,7 @@ extension UIImageView {
     ///   - link: string for image url
     ///   - mode: How image should be displayed
     func downloaded(from link: String?, contentMode mode: ContentMode = .scaleAspectFill) {
-        guard let link = link, let url = URL(string: link) else { return }
+        guard let link, let url = URL(string: link) else { return }
         downloaded(from: url, contentMode: mode)
     }
 }

@@ -28,7 +28,7 @@ class NetworkLayer: NetworkLayerProtocol {
     ///   - completion: Completion handler that either return response's JSON data or error
     func perform<A>(request: URLRequestConvertable, completion: @escaping (Result<A, Error>) -> Void) where A : Decodable {
         self.task = session.dataTask(with: request.asURLRequest()) { data, response, error in
-            guard let data = data, error == nil else {
+            guard let data, error == nil else {
                 completion(.failure(NetworkError.clientError))
                 return
             }
