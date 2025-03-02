@@ -6,20 +6,31 @@
 //
 
 import Foundation
+import Combine
+
+typealias NewsViewUpdates = PassthroughSubject<NewsViewModel.State, Never>
 
 protocol NewsViewModelProtocol: AnyObject {
-    var delegate: NewsViewDelegate? { get set }
+    var updates: NewsViewUpdates { get }
     var viewData: [News] { get }
     
     func fetchNews() -> Void
 }
 
 class NewsViewModel: NewsViewModelProtocol {
+    enum State {
+        case dataUpdated
+        case error(Error)
+    }
     
-    weak var delegate: NewsViewDelegate?
     private var repository: NewsRepositoryProtocol
     
-    private(set) var viewData: [News] = []
+    private(set) var viewData: [News] = [] {
+        didSet {
+            self.updates.send(.dataUpdated)
+        }
+    }
+    private(set) var updates: NewsViewUpdates = .init()
     
     init(repository: NewsRepositoryProtocol = NewsRepository()) {
         self.repository = repository
@@ -31,9 +42,8 @@ class NewsViewModel: NewsViewModelProtocol {
             switch result {
             case .success(let model):
                 self.viewData.append(contentsOf: model.results)
-                self.delegate?.reloadData()
             case .failure(let error):
-                self.delegate?.show(error: error.localizedDescription)
+                self.updates.send(.error(error))
             }
         }
     }

@@ -7,12 +7,11 @@
 
 import UIKit
 import WebKit
+import Combine
 
-protocol NewsDetailViewDelegate where Self: UIViewController {
-    func showDetails(with detail: String)
-}
+protocol NewsDetailViewDelegate where Self: UIViewController { }
 
-class NewsDetailView: UIViewController {
+class NewsDetailView: UIViewController, NewsDetailViewDelegate {
     
     private var webView: WKWebView = {
         let webView = WKWebView()
@@ -20,12 +19,13 @@ class NewsDetailView: UIViewController {
         return webView
     }()
     
-    private(set) var viewModel: NewsDetailViewProtocol
+    private(set) var cancellable: Set<AnyCancellable> = []
+    
+    private let viewModel: NewsDetailViewProtocol
     
     init(viewModel: NewsDetailViewProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        self.viewModel.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -38,6 +38,7 @@ class NewsDetailView: UIViewController {
         setupView()
         setupWebViewConstrains()
         
+        subscribeUpdate()
         viewModel.populateDetailData()
     }
     
@@ -56,8 +57,16 @@ class NewsDetailView: UIViewController {
     }
 }
 
-extension NewsDetailView: NewsDetailViewDelegate {
-    func showDetails(with detail: String) {
+extension NewsDetailView {
+    private func subscribeUpdate() {
+        self.viewModel.detailUpdate
+            .receive(on: DispatchQueue.main)
+            .sink { [unowned self] url in
+                self.showDetails(with: url)
+            }.store(in: &cancellable)
+    }
+    
+    private func showDetails(with detail: String) {
         guard let url = URL(string: detail) else { return }
         let urlRequest = URLRequest(url: url)
         webView.load(urlRequest)

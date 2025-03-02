@@ -6,17 +6,17 @@
 //
 
 import UIKit
+import Combine
 
-protocol NewsViewDelegate where Self: UIViewController {
-    func reloadData()
-    func show(error: String)
-}
+protocol NewsViewDelegate where Self: UIViewController { }
 
-class NewsView: UIViewController {
-    private var viewModel: NewsViewModelProtocol
-    private var coordinator: MainCoordinatorProtocol
+class NewsView: UIViewController, NewsViewDelegate {
     
-    var tableView : UITableView = {
+    private let viewModel: NewsViewModelProtocol
+    private let coordinator: MainCoordinatorProtocol
+    private var cancellables: Set<AnyCancellable> = []
+    
+    private var tableView : UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.separatorStyle = .none
@@ -28,7 +28,6 @@ class NewsView: UIViewController {
         self.viewModel = viewModel
         self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
-        viewModel.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -43,6 +42,7 @@ class NewsView: UIViewController {
         setupNavigationBar()
         setupTableView()
         
+        subscribeUpdates()
         viewModel.fetchNews()
     }
     
@@ -74,15 +74,29 @@ class NewsView: UIViewController {
     }
 }
 
-extension NewsView: NewsViewDelegate, Toastable {
-    func reloadData() {
+extension NewsView: Toastable {
+    private func subscribeUpdates() {
+        viewModel.updates
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] state in
+                switch state {
+                case .dataUpdated:
+                    self?.reloadData()
+                case .error(let error):
+                    self?.show(error: error.localizedDescription)
+                }
+                
+            }).store(in: &cancellables)
+    }
+    
+    private func reloadData() {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
             self.tableView.reloadData()
         }
     }
     
-    func show(error: String) {
+    private func show(error: String) {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
             self.showToast(message: error)
