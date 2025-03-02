@@ -7,6 +7,10 @@
 
 import Foundation
 
+struct NewsRequestModel: Decodable {
+    var section: String, period: Int
+}
+
 struct NewsResponseModel: Decodable {
     var status: String
     var numResults: Int

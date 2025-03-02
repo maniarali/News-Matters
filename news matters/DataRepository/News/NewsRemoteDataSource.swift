@@ -8,7 +8,7 @@
 import Foundation
 
 protocol NewsRemoteDataSourceProtocol {
-    func getNews(for section: String, period: Int, completion: @escaping (Result<NewsResponseModel, Error>) -> Void)
+    func getNews(for request: NewsRequestModel, completion: @escaping (Result<NewsResponseModel, Error>) -> Void)
 }
 
 class NewsRemoteDataSource: NewsRemoteDataSourceProtocol {
@@ -19,8 +19,8 @@ class NewsRemoteDataSource: NewsRemoteDataSourceProtocol {
         self.network = network
     }
     
-    func getNews(for section: String, period: Int, completion: @escaping (Result<NewsResponseModel, Error>) -> Void) {
-        let mostPopularRequest = APIRoute.ArticleRoute.mostPopularArticles(section: section, period: period)
+    func getNews(for request: NewsRequestModel, completion: @escaping (Result<NewsResponseModel, Error>) -> Void) {
+        let mostPopularRequest = APIRoute.ArticleRoute.mostPopularArticles(request: request)
         network.perform(request: mostPopularRequest, completion: completion)
     }
 }

@@ -71,11 +71,10 @@ class NewsView: UIViewController {
     
     private func setupNavigationBar() {
         navigationController?.navigationBar.prefersLargeTitles = true
-        title = "NY Times Most Popular"
+        title = String(localized: "home_title")
     }
 }
-extension NewsView: NewsViewDelegate {
-    
+extension NewsView: NewsViewDelegate, Toastable {
     func reloadData() {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
@@ -84,7 +83,10 @@ extension NewsView: NewsViewDelegate {
     }
     
     func show(error: String) {
-        //This method can be use to show error
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.showToast(message: error)
+        }
     }
 }
 
