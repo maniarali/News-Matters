@@ -1,5 +1,5 @@
 //
-//  NewsModel.swift
+//  NewsModels.swift
 //  news matters
 //
 //  Created by Muhammad Ali Maniar on 20/11/2021.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct NewsRequestModel: Decodable {
+struct NewsRequestModel {
     var section: String, period: Int
 }
 

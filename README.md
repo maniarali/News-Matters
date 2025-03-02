@@ -1,36 +1,75 @@
 # News-Matters
-** Project Description **
+A localized news app showcasing the **most viewed** and **most popular** New York Times news, aptly named **"News Matters"**.  
 
-Build simple app that hits the	NY Times Most Popular Articles API and show a list of articles, its shows	details	when items on the list are tapped.
-  API: http://api.nytimes.com/svc/mostpopular/v2/mostviewed/{section}/{period}.json?apikey=sample-key
+---
 
-** Build Project **
-1. Download Project:
-  a. App can be downloaded directly from Section above Code -> Download Zip
-  b. App can also be clone from url above Code -> Clone via HTTPS
-2. As there is no external dependency is added project shall open via news matter.xcodeproj
-3. Click on Run or press CMD + R
-4. Hurray you are ready to View News From NYTimes Popular Section
+## What's in the README
+- [🚀 Quick Summary](#quick-summary)  
+- [📥 Clone Project and Requirements](#clone-project-and-requirements)  
+- [🛠️ Build Project](#build-project)  
+- [✅ Unit Tests](#unit-tests)  
+- [📱 App Flow](#app-flow)  
+- [🏛️ Architectural Pattern](#architectural-pattern)  
+- [🌟 Improvements for the Future](#improvements-for-the-future)  
 
-** Unit Test **
-1. Press CMD + U in app to run Test cases
-2. To view converage Click on Report Navigator
-3. Open Coverage Section 
-4. Click on news matters.app
+---
 
-** App Flow **
-1. App show listing of Most Popular NY Times
-2. On clicking any item list redirect to detail screen
+## Quick Summary
+**News Matters** is a simple iOS app that fetches data from the NY Times Most Popular Articles API and displays a list of articles. Tap an article to view its details!  
+**API Endpoint:**  
+`http://api.nytimes.com/svc/mostpopular/v2/mostviewed/{section}/{period}.json?api-key=sample-key`
 
-** Architectural Pattern **
-1. For presentation layer => MVVM
-2. For data layer => Repository Pattern
-3. For Routing => Coordinator Pattern
+---
 
-** Solid Design Principles **
-Class are tried created in a manner where each class have single resposibilities, and its close modification and open for extension, inteface are implemented at segrated level, and dependecies are inverted as much possible.
+## Clone Project and Requirements
+- Clone via HTTPS: `https://github.com/maniarali/News-Matters.git`  
+- Download as a ZIP from the repository.  
+- Checkout the **main** branch for the default implementation.  
+- For Combine framework, checkout the **combine** branch.  
+- 📱 **Minimum iOS Version: 16.0**, Supported Xcode: **16.2**
 
-** Room for improvement **
-There can be seprate layer for business decision which can be done at (Uses Cases)
-There can be depdency containter to implment dependecy inversion properly
-There can be implementation to show data from persistence i.e. when internet is not available
+---
+
+## Build Project
+1. **Download Project:**  
+   a. Download directly: `Code > Download ZIP`  
+   b. Clone via HTTPS: `Code > Clone via HTTPS`  
+2. Open the project by double-clicking `News-Matters.xcodeproj`.  
+   - No external dependencies required!  
+3. Click `Run` or press `CMD + R` in Xcode.  
+4. Hurray! 🎉 You’re ready to view NY Times popular news!
+
+---
+
+## Unit Tests
+1. Run tests by pressing `CMD + U` in Xcode.  
+2. View coverage:  
+   - Go to the **Report Navigator**.  
+   - Open the **Coverage** section.  
+   - Click on `News-Matters.app` to see details.
+
+---
+
+## App Flow
+1. **Home Screen:** Displays a list of the most popular NY Times articles.  
+2. **Detail Screen:** Tap any article to see its full details.
+
+---
+
+## Architectural Pattern
+- **Presentation Layer:** MVVM (Model-View-ViewModel)  
+- **Data Layer:** Repository Pattern  
+- **Navigation:** Coordinator Pattern  
+
+---
+
+## Improvements for the Future
+- Add a **Business Logic Layer** with Use Cases.  
+- Implement a **Dependency Container** for better dependency inversion.  
+- Enable **offline persistence** to show cached data without internet.  
+- Add **search functionality**, period/section dropdowns.  
+- Upgrade UI to **SwiftUI** and use **Combine** for layer communication.
+
+---
+
+Enjoy exploring **News Matters**! Contributions and feedback are welcome! 🙌
