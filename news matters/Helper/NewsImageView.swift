@@ -1,5 +1,5 @@
 //
-//  UIImageView+Extensions.swift
+//  NewsImageView.swift
 //  news matters
 //
 //  Created by Muhammad Ali Maniar on 20/11/2021.
@@ -8,7 +8,12 @@
 import Foundation
 import UIKit
 
-extension UIImageView {
+protocol ImageDownloadable where Self: UIImageView {
+    func downloaded(from url: URL, contentMode mode: ContentMode)
+    func downloaded(from link: String?, contentMode mode: ContentMode)
+}
+
+extension ImageDownloadable {
     /// Function to download image from url and also resposible to set on imageview if available
     /// - Parameters:
     ///   - url: URL to fetch image from
@@ -37,3 +42,5 @@ extension UIImageView {
         downloaded(from: url, contentMode: mode)
     }
 }
+
+class NewsImageView: UIImageView, ImageDownloadable { }

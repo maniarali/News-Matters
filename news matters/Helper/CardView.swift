@@ -1,5 +1,5 @@
 //
-//  UIView+Extensions.swift
+//  CardView.swift
 //  news matters
 //
 //  Created by Muhammad Ali Maniar on 20/11/2021.
@@ -8,9 +8,15 @@
 import Foundation
 import UIKit
 
-extension UIView {
-    
-    /// Will convert AnyView in card shape
+protocol Cardable where Self: UIView {
+    func createCardView(cornerRadius: CGFloat,
+                        shadowColor: CGColor,
+                        shadowOffset: CGSize,
+                        shadowRadius: CGFloat,
+                        shadowOpacity: Float)
+}
+
+extension Cardable {
     func createCardView(cornerRadius: CGFloat = 20.0,
                         shadowColor: CGColor = UIColor.darkGray.cgColor,
                         shadowOffset: CGSize = CGSize(width: 0.0, height: 0.0),
@@ -23,3 +29,5 @@ extension UIView {
         layer.shadowOpacity = shadowOpacity
     }
 }
+
+class CardView: UIView, Cardable { }

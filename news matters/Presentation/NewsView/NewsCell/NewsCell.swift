@@ -8,17 +8,17 @@
 import UIKit
 
 class NewsCell: UITableViewCell {
-
-    var cardBackgroundView: UIView = {
-        let cbgv = UIView()
+    
+    var cardBackgroundView: Cardable = {
+        let cbgv = CardView()
         cbgv.translatesAutoresizingMaskIntoConstraints = false
         cbgv.backgroundColor = .lightGray
         cbgv.clipsToBounds = true
         return cbgv
     }()
     
-    var newsImageView: UIImageView = {
-        let niv = UIImageView()
+    var newsImageView: NewsImageView = {
+        let niv = NewsImageView()
         niv.translatesAutoresizingMaskIntoConstraints = false
         niv.contentMode = .scaleAspectFit
         niv.clipsToBounds = true
@@ -130,6 +130,7 @@ class NewsCell: UITableViewCell {
             titleLabel.text = news?.title
             authorLabel.text = news?.byline
             dateLabel.text = news?.publishedDate
+            newsImageView.image = nil
             newsImageView.downloaded(from: news?.media.first?.mediaMetadata.first?.url)
         }
     }

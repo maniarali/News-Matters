@@ -21,9 +21,7 @@ class NewsDetailViewModel: NewsDetailViewProtocol {
         self.news = news
     }
     
-    
     func populateDetailData() {
         delegate?.showDetails(with: news.url)
     }
- 
 }
