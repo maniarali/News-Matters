@@ -13,7 +13,6 @@ protocol NewsViewDelegate where Self: UIViewController {
 }
 
 class NewsView: UIViewController {
-    
     private var viewModel: NewsViewModelProtocol
     private var coordinator: MainCoordinatorProtocol
     
@@ -74,6 +73,7 @@ class NewsView: UIViewController {
         title = String(localized: "home_title")
     }
 }
+
 extension NewsView: NewsViewDelegate, Toastable {
     func reloadData() {
         DispatchQueue.main.async { [weak self] in
