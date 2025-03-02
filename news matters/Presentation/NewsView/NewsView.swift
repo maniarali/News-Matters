@@ -7,14 +7,14 @@
 
 import UIKit
 
-protocol NewsViewProtocol: AnyObject {
+protocol NewsViewDelegate where Self: UIViewController {
     func reloadData()
     func show(error: String)
 }
 
 class NewsView: UIViewController {
     
-    private var viewModel: NewsViewModelBinder
+    private var viewModel: NewsViewModelProtocol
     private var coordinator: MainCoordinatorProtocol
     
     var tableView : UITableView = {
@@ -25,11 +25,11 @@ class NewsView: UIViewController {
         return tableView
     }()
     
-    init(viewModel: NewsViewModelBinder, coordinator: MainCoordinatorProtocol) {
+    init(viewModel: NewsViewModelProtocol, coordinator: MainCoordinatorProtocol) {
         self.viewModel = viewModel
         self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
-        viewModel.binder = self
+        viewModel.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -74,7 +74,7 @@ class NewsView: UIViewController {
         title = "NY Times Most Popular"
     }
 }
-extension NewsView: NewsViewProtocol {
+extension NewsView: NewsViewDelegate {
     
     func reloadData() {
         DispatchQueue.main.async { [weak self] in

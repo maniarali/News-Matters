@@ -7,15 +7,15 @@
 
 import Foundation
 
-protocol NewsDetailViewBinder: AnyObject {
-    var binder: NewsDetailViewProtocol? { get set }
+protocol NewsDetailViewProtocol {
+    var delegate: NewsDetailViewDelegate? { get set }
     func populateDetailData()
 }
 
-class NewsDetailViewModel: NewsDetailViewBinder {
+class NewsDetailViewModel: NewsDetailViewProtocol {
     
     private var news: News
-    weak var binder: NewsDetailViewProtocol?
+    weak var delegate: NewsDetailViewDelegate?
     
     init(news: News) {
         self.news = news
@@ -23,7 +23,7 @@ class NewsDetailViewModel: NewsDetailViewBinder {
     
     
     func populateDetailData() {
-        binder?.showDetails(with: news.url)
+        delegate?.showDetails(with: news.url)
     }
  
 }

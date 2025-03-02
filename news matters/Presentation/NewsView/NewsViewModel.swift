@@ -7,16 +7,16 @@
 
 import Foundation
 
-protocol NewsViewModelBinder: AnyObject {
-    var binder: NewsViewProtocol? { get set }
+protocol NewsViewModelProtocol: AnyObject {
+    var delegate: NewsViewDelegate? { get set }
     var viewData: [News] { get }
     
     func fetchNews() -> Void
 }
 
-class NewsViewModel: NewsViewModelBinder {
+class NewsViewModel: NewsViewModelProtocol {
     
-    weak var binder: NewsViewProtocol?
+    weak var delegate: NewsViewDelegate?
     private var repository: NewsRepositoryProtocol
     
     private(set) var viewData: [News] = []
@@ -31,9 +31,9 @@ class NewsViewModel: NewsViewModelBinder {
             switch result {
             case .success(let model):
                 self.viewData.append(contentsOf: model.results)
-                self.binder?.reloadData()
+                self.delegate?.reloadData()
             case .failure(let error):
-                self.binder?.show(error: error.localizedDescription)
+                self.delegate?.show(error: error.localizedDescription)
             }
         }
     }

@@ -16,14 +16,14 @@ struct MainCoordinator: Coordinator, MainCoordinatorProtocol {
     var navigationController: UINavigationController
 
     func start() {
-        let vc: NewsView = NewsView(viewModel: NewsViewModel(), coordinator: self)
+        let viewModel: NewsViewModelProtocol = NewsViewModel()
+        let vc: NewsViewDelegate = NewsView(viewModel: viewModel, coordinator: self)
         navigationController.pushViewController(vc, animated: false)
     }
     
-    //TODO: Maniar - Child Coordinator
     func showNewsDetails(with news: News) {
-        let viewModel: NewsDetailViewBinder = NewsDetailViewModel(news: news)
-        let detailView: NewsDetailViewProtocol = NewsDetailView(viewModel: viewModel)
+        let viewModel: NewsDetailViewProtocol = NewsDetailViewModel(news: news)
+        let detailView: NewsDetailViewDelegate = NewsDetailView(viewModel: viewModel)
         navigationController.pushViewController(detailView, animated: true)
     }
 }

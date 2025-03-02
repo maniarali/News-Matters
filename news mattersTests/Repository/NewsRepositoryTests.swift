@@ -39,7 +39,7 @@ class NewsRepositoryTest: XCTestCase {
 
 class MockSuccessNewsRemoteDataSource: NewsRemoteDataSourceProtocol {
     func getNews(for section: String, period: Int, completion: @escaping (Result<NewsResponseModel, Error>) -> Void) {
-        completion(.success(NewsResponseModel(status: "", numResults: 0, results: [])))
+        completion(.success(TestFactory.aNewsResponse))
     }
 }
 
