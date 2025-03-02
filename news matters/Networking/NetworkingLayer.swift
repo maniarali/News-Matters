@@ -20,12 +20,6 @@ class NetworkLayer: NetworkLayerProtocol {
         self.session = session
     }
     
-    //MARK: Maniar - Generic not only Get
-    /// Perform POST request
-    /// - Parameters:
-    ///   - url: Remote API endpoint
-    ///   - parameters: Request's JSON data
-    ///   - completion: Completion handler that either return response's JSON data or error
     func perform<A>(request: URLRequestConvertable, completion: @escaping (Result<A, Error>) -> Void) where A : Decodable {
         self.task = session.dataTask(with: request.asURLRequest()) { data, response, error in
             guard let data, error == nil else {

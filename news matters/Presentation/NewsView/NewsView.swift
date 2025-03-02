@@ -73,6 +73,7 @@ class NewsView: UIViewController, NewsViewDelegate {
         title = String(localized: "home_title")
     }
 }
+
 extension NewsView: Toastable {
     private func subscribeUpdates() {
         viewModel.updates
