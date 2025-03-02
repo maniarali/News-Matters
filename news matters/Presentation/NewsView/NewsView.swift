@@ -77,14 +77,14 @@ class NewsView: UIViewController {
 extension NewsView: NewsViewDelegate, Toastable {
     func reloadData() {
         DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
+            guard let self else { return }
             self.tableView.reloadData()
         }
     }
     
     func show(error: String) {
         DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
+            guard let self else { return }
             self.showToast(message: error)
         }
     }
