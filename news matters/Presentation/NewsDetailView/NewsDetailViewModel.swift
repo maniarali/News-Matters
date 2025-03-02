@@ -6,24 +6,26 @@
 //
 
 import Foundation
+import Combine
+
+typealias NewsDetailViewDataUpdates = PassthroughSubject<String, Never>
 
 protocol NewsDetailViewProtocol {
-    var delegate: NewsDetailViewDelegate? { get set }
+    var detailUpdate: NewsDetailViewDataUpdates { get }
     func populateDetailData()
 }
 
 class NewsDetailViewModel: NewsDetailViewProtocol {
     
     private var news: News
-    weak var delegate: NewsDetailViewDelegate?
+    
+    let detailUpdate: NewsDetailViewDataUpdates = .init()
     
     init(news: News) {
         self.news = news
     }
     
-    
     func populateDetailData() {
-        delegate?.showDetails(with: news.url)
+        detailUpdate.send(news.url)
     }
- 
 }
