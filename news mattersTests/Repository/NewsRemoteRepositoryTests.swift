@@ -40,14 +40,13 @@ class NewsRemoteRepositoryTests: XCTestCase {
 }
 
 class MockSuccessNetworkLayer: NetworkLayerProtocol {
-    func get<A>(url: URL, completion: @escaping (Result<A, Error>) -> Void) where A : Decodable {
-        let model = NewsResponseModel(status: "OK", numResults: 0, results: [])
-        completion(.success(model as! A))
+    func perform<A>(request: any news_matters.URLRequestConvertable, completion: @escaping (Result<A, any Error>) -> Void) where A : Decodable {
+        completion(.success(TestFactory.aNewsResponse as! A))
     }
 }
 
 class MockFailureNetworkLayerProtocol: NetworkLayerProtocol {
-    func get<A>(url: URL, completion: @escaping (Result<A, Error>) -> Void) where A : Decodable {
+    func perform<A>(request: any news_matters.URLRequestConvertable, completion: @escaping (Result<A, any Error>) -> Void) where A : Decodable {
         completion(.failure(APIError.fakeError))
     }
 }

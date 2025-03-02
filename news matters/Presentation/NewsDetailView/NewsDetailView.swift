@@ -8,7 +8,7 @@
 import UIKit
 import WebKit
 
-protocol NewsDetailViewProtocol: AnyObject where Self: UIViewController {
+protocol NewsDetailViewDelegate where Self: UIViewController {
     func showDetails(with detail: String)
 }
 
@@ -20,12 +20,12 @@ class NewsDetailView: UIViewController {
         return webView
     }()
     
-    private(set) var viewModel: NewsDetailViewBinder
+    private(set) var viewModel: NewsDetailViewProtocol
     
-    init(viewModel: NewsDetailViewBinder) {
+    init(viewModel: NewsDetailViewProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        self.viewModel.binder = self
+        self.viewModel.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -56,7 +56,7 @@ class NewsDetailView: UIViewController {
     }
 }
 
-extension NewsDetailView: NewsDetailViewProtocol {
+extension NewsDetailView: NewsDetailViewDelegate {
     func showDetails(with detail: String) {
         let url = URL(string: detail)!
         let urlRequest = URLRequest(url: url)
