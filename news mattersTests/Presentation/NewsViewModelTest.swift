@@ -6,32 +6,81 @@
 //
 
 import XCTest
+import Combine
 @testable import news_matters
 
-class NewsViewModelTest: XCTestCase {
-
-    func testGetNewsSuccessful() {
-        let sut: NewsViewModelProtocol = NewsViewModel(repository: SuccessMockRepositoryProtocol())
-        sut.fetchNews()
-        XCTAssertEqual(sut.viewData.count, 1)
+class NewsViewModelTests: XCTestCase {
+    var viewModel: NewsViewModelProtocol!
+    var cancellables: Set<AnyCancellable>!
+    
+    override func setUp() {
+        super.setUp()
+        cancellables = []
     }
     
-    func testGetNewsFailure() {
-        let sut: NewsViewModelProtocol = NewsViewModel(repository: FailureMockRepositoryProtocol())
-        sut.fetchNews()
-        XCTAssertEqual(sut.viewData.count, 0)
+    override func tearDown() {
+        viewModel = nil
+        cancellables = nil
+        super.tearDown()
     }
-
+    
+    func testFetchNewsSuccess() {
+        let expectedNews = [TestFactory.aNews]
+        let repository = MockNewsRepository(result: .success(expectedNews))
+        viewModel = NewsViewModel(repository: repository)
+        let expectation = XCTestExpectation(description: "News fetched and data updated")
+        
+        var receivedStates: [NewsViewModel.State] = []
+        viewModel.updates
+            .sink { state in
+                receivedStates.append(state)
+                switch state {
+                case .dataUpdated:
+                    expectation.fulfill()
+                case .error(let error):
+                    XCTFail("Fetch failed \(error.localizedDescription)")
+                }
+            }
+            .store(in: &cancellables)
+        
+        viewModel.fetchNews()
+        
+        wait(for: [expectation], timeout: 1.0)
+        XCTAssertEqual(viewModel.viewData.count, 1)
+    }
+    
+    func testFetchNewsFailure() {
+        let expectedError = APIError.fakeError
+        let repository = MockNewsRepository(result: .failure(expectedError))
+        viewModel = NewsViewModel(repository: repository)
+        let expectation = XCTestExpectation(description: "Error received from fetchNews")
+        
+        var receivedStates: [NewsViewModel.State] = []
+        viewModel.updates
+            .sink { state in
+                receivedStates.append(state)
+                if case .error = state {
+                    expectation.fulfill()
+                }
+            }
+            .store(in: &cancellables)
+        
+        viewModel.fetchNews()
+        
+        wait(for: [expectation], timeout: 1.0)
+        XCTAssertTrue(viewModel.viewData.isEmpty)
+    }
 }
 
-class FailureMockRepositoryProtocol: NewsRepositoryProtocol {
-    func getNews(completion: @escaping (Result<NewsResponseModel, Error>) -> Void) {
-        completion(.failure(APIError.fakeError))
+class MockNewsRepository: NewsRepositoryProtocol {
+    let result: Result<[News], Error>
+    
+    init(result: Result<[News], Error>) {
+        self.result = result
     }
-}
-
-class SuccessMockRepositoryProtocol: NewsRepositoryProtocol {
-    func getNews(completion: @escaping (Result<NewsResponseModel, Error>) -> Void) {
-        completion(.success(TestFactory.aNewsResponse))
+    
+    func getNews() -> AnyPublisher<[News], Error> {
+        return result.publisher
+            .eraseToAnyPublisher()
     }
 }
